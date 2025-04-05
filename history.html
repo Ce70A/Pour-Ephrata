@@ -40,16 +40,77 @@
                 "Peur de te faire du mal",
                 "Je t'aime à la folie",
                 " je ne sais pas comment m'y prendre",
-                "Pardonne moi si je réussis pas à t'avouer mes sentiments",
-                "Accorde moi le temp de m'y préparer",
-                "Je veux que ce soit du sérieux entre nous",
-                "Je te demande Juste un peu de temp",
-                "J'imagine ce que tu peux ressentir",
-                "Je m'excuse pour cela",
-                "Ce ne m'était jamais arrivé je suis amoureux",
-                "J'ai peur oui j'ai peur",
-                "Pardonne moi",
-                "Je t'aime❤️",
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pour toi ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding-top: 50px;
+            min-height: 100vh;
+        }
+        #message {
+            font-size: 24px;
+            color: #ff4d4d;
+            opacity: 0;
+            transition: opacity 1s, transform 0.5s;
+            transform: translateY(20px);
+            min-height: 80px;
+            margin: 20px auto;
+        }
+        #message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #heart {
+            font-size: 60px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        #heart:hover { transform: scale(1.1); }
+        #heart:active { transform: scale(0.9); }
+        
+        @media (max-width: 600px) {
+            #message { font-size: 18px; }
+            h1 { font-size: 24px; }
+        }
+    #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+  
+    <h1>Bonsoir <span id="name">Ephrata</span> ❤️</h1>
+    <div id="message"></div>
+    <div id="heart" onclick="showMessage()">❤️</div>
+    
+   <div id="music-control">🎵</div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function showMessage() {
+            const messages = [
+                "Depuis que je te connais...",
+                "Mon monde est plus coloré",
+                "Ton sourire me rend heureux",
+                // ... (ton texte existant)
                 "Tu es spéciale à mes yeux ❤️"
             ];
             
@@ -58,6 +119,7 @@
             
             let i = 0;
             messageElement.style.opacity = 1;
+            messageElement.classList.add('show');
             
             const interval = setInterval(() => {
                 if (i < messages.length) {
@@ -66,9 +128,24 @@
                 } else {
                     clearInterval(interval);
                     heart.textContent = "❤️ Clique encore ! ❤️";
+                    confetti({ particleCount: 150, spread: 70 });
                 }
-            }, 5000);
+            }, 4000);
         }
+         Intégration audio
+        const music = new Audio();
+        music.src = "https://drive.google.com/uc?export=download&id=1gN-OTNxN5rT4BtWL1WYPFdDlP1byKcF8";
+        music.loop = true;
+        
+        document.getElementById('music-control').addEventListener('click', function() {
+            if (music.paused) {
+                music.play();
+                this.textContent = "🔊";
+            } else {
+                music.pause();
+                this.textContent = "🎵";
+            }
+        });
     </script>
 </body>
 </html>
